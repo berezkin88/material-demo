@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+
 
 @Component({
   selector: 'app-root',
@@ -6,6 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  minDate = new Date(2020, 10, 15);
-  maxDate = new Date(2020, 11, 15);
+
+  constructor(private dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(EditCourseComponent, {
+      data: { courseId: 1 }
+    })
+      .afterClosed()
+      .subscribe(result => console.log(result));
+  }
 }
